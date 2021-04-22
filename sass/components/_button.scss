@@ -1,0 +1,65 @@
+/* ======== Button Start ======== */
+
+.btn {
+  &:link,
+  &:visited {
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 1.5rem 4rem;
+    border-radius: 20rem;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s; /* This is for the transform in the hover state. */
+    font-size: 1.6rem;
+  }
+
+  /* Note that the transition property for the below transform is above on the original state of the button. */
+  &:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    /* This is the after button for the hover state. We grow it and make it invisible. */
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-gray-dark;
+
+    /* This is the after state for the white button. */
+    &::after {
+      background-color: $color-white;
+      color: $color-gray-dark;
+    }
+  }
+
+  /* This is for the animation - we create another button behind the actual button that expands into infinity */
+  &::after {
+    content: "";
+    display: inline-block;
+    border-radius: 20rem;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  /* We separate out the animation as a class so that we can use it on other buttons as well. */
+  &--animated {
+    animation: moveInBottom 1s ease-out 0.75s;
+    animation-fill-mode: backwards;
+  }
+}
+
+/* ======== Button End ======== */
