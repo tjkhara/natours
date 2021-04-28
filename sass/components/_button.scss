@@ -30,6 +30,7 @@
     box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
   }
 
+  // White button
   &--white {
     background-color: $color-white;
     color: $color-gray-dark;
@@ -37,7 +38,17 @@
     /* This is the after state for the white button. */
     &::after {
       background-color: $color-white;
-      color: $color-gray-dark;
+    }
+  }
+
+  // Green button
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    /* This is the after state for the white button. */
+    &::after {
+      background-color: $color-primary;
     }
   }
 
