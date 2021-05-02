@@ -13,6 +13,7 @@
     border-bottom: 3px solid transparent;
     width: 90%;
     display: block;
+    transition: all 0.3s;
 
     &:focus {
       outline: none;
@@ -29,6 +30,11 @@
     }
   }
 
+  // Hide the radio input
+  &__radio-input {
+    display: none;
+  }
+
   &__label {
     font-size: 1.2rem;
     font-weight: 700;
@@ -42,5 +48,54 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4rem);
+  }
+
+  // Radio button styling
+
+  // This is radio button and text
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  // This is just the text
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 5rem;
+  }
+
+  // Styling for radio button - big green circle
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+
+    // This is for the inner green dot/circle
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      // To position in center we use absolute positioning
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+    }
+  }
+
+  // Just seeing which radio button is checked and making  the opacity of the after element 1
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
   }
 }

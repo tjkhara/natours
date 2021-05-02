@@ -1,6 +1,7 @@
 /* ======== Button Start ======== */
 
 .btn {
+  &, // Added to make button element look fine
   &:link,
   &:visited {
     text-decoration: none;
@@ -11,6 +12,10 @@
     position: relative;
     transition: all 0.2s; /* This is for the transform in the hover state. */
     font-size: $default-font-size;
+
+    // Changes for the button element
+    border: none;
+    cursor: pointer;
   }
 
   /* Note that the transition property for the below transform is above on the original state of the button. */
@@ -25,9 +30,11 @@
     }
   }
 
+  &:focus, // Added focus state here to get rid of outline
   &:active {
+    outline: none; // getting rid of outline in focus state
     transform: translateY(-0.1rem);
-    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2); // Instead of outline we add a box shadow
   }
 
   // White button
