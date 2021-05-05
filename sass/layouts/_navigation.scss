@@ -18,6 +18,10 @@
     border-radius: 50%;
     z-index: 2000;
     box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
+
+    // For three line button
+    text-align: center;
+    cursor: pointer;
   }
 
   //   green circle
@@ -103,7 +107,7 @@
     }
   }
 
-  & span {
+  &__link span {
     margin-right: 1.5rem;
     display: inline-block;
   }
@@ -118,5 +122,62 @@
   &__checkbox:checked ~ &__nav {
     opacity: 1;
     width: 100%;
+  }
+
+  // Three line button
+  &__icon {
+    position: relative;
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-gray-dark-3;
+      display: inline-block; // They will be one on top of another when we do absolute positioning
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    &::before {
+      top: -0.8rem;
+    }
+
+    &::after {
+      top: 0.8rem;
+    }
+  }
+
+  // Expanding the top and bottom lines on hover
+  &__button:hover &__icon {
+    &::before {
+      top: -1rem;
+    }
+    &::after {
+      top: 1rem;
+    }
+  }
+
+  // Forming a cross
+  // This is on checked
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+
+    &::before {
+      transform: rotate(135deg);
+      top: 0;
+    }
+
+    &::after {
+      transform: rotate(-135deg);
+      top: 0;
+    }
   }
 }
