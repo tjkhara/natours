@@ -17,6 +17,7 @@
     right: 6rem;
     border-radius: 50%;
     z-index: 2000;
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
   }
 
   //   green circle
@@ -33,7 +34,9 @@
     );
     z-index: 1000;
     // To grow the green circle
-    transform: scale(80);
+    // transform: scale(80);
+
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
   }
 
   //   huge element that covers the viewport
@@ -42,9 +45,16 @@
     width: 100%;
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     // This is above the green circle and below the white circle
     z-index: 1500;
+
+    // Hide nav
+    opacity: 0;
+    width: 0;
+
+    // animation
+    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   //   This is the ul
@@ -96,5 +106,17 @@
   & span {
     margin-right: 1.5rem;
     display: inline-block;
+  }
+
+  // Use the general sibling selector to select the background div
+  // We want to select the background div in a checked state
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  // In the checked state of the checkbox we want the nav to be shown again
+  &__checkbox:checked ~ &__nav {
+    opacity: 1;
+    width: 100%;
   }
 }
