@@ -5,8 +5,8 @@
 
   &__input {
     font-size: 1.5rem;
-    font-family: inherit;
     color: inherit;
+    font-family: inherit;
     padding: 1.5rem 2rem;
     background-color: rgba($color-white, 0.5);
     border: none;
@@ -15,24 +15,23 @@
     display: block;
     transition: all 0.3s;
 
+    @include respond(tab-port) {
+      width: 100%;
+    }
+
     &:focus {
       outline: none;
       box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
       border-bottom: 3px solid $color-primary;
+    }
 
-      &:invalid {
-        border-bottom: 3px solid $color-secondary-dark;
-      }
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
     }
 
     &::-webkit-input-placeholder {
       color: $color-gray-dark-2;
     }
-  }
-
-  // Hide the radio input
-  &__radio-input {
-    display: none;
   }
 
   &__label {
@@ -50,23 +49,28 @@
     transform: translateY(-4rem);
   }
 
-  // Radio button styling
-
-  // This is radio button and text
   &__radio-group {
     width: 49%;
     display: inline-block;
+
+    @include respond(tab-port) {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
   }
 
-  // This is just the text
+  // Hiding the radio input element
+  &__radio-input {
+    display: none;
+  }
+
   &__radio-label {
     font-size: $default-font-size;
     cursor: pointer;
     position: relative;
-    padding-left: 5rem;
+    padding-left: 4.5rem;
   }
 
-  // Styling for radio button - big green circle
   &__radio-button {
     height: 3rem;
     width: 3rem;
@@ -77,24 +81,31 @@
     left: 0;
     top: -0.4rem;
 
-    // This is for the inner green dot/circle
+    // This is for the inner element - the dot inside the circle
     &::after {
       content: "";
       display: block;
       height: 1.3rem;
       width: 1.3rem;
       border-radius: 50%;
-      // To position in center we use absolute positioning
+      // Position this in the center of the other circle
+      // For this absolute position we have to set positioning to relative on the parent
+      // The parent already has absolute positioning and that is also fine
+      // Does not have to be relative just has to be specified
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       background-color: $color-primary;
       opacity: 0;
+      transition: opacity 0.2s;
     }
   }
 
-  // Just seeing which radio button is checked and making  the opacity of the after element 1
+  // This is to hide the radio button when checked
+  // We want to hide the inner circle
+  // We first use the sibling selector to get to the label from the input
+  // and then to the radio-button::after from the label
   &__radio-input:checked ~ &__radio-label &__radio-button::after {
     opacity: 1;
   }
